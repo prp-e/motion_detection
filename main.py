@@ -1,5 +1,5 @@
 import cv2
-import time
+from uuid import uuid4
 
 cam = cv2.VideoCapture(1)
 first_frame = None
@@ -26,6 +26,7 @@ while cam.isOpened():
             (x, y, w, h) = cv2.boundingRect(c)
             #cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 3)
             cv2.putText(frame, 'INTRUDER ACTIVIY',(0, 100), cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 0, 0), 2, cv2.LINE_AA)
+            cv2.imwrite(f'{uuid4()}.jpg', frame)
 
     cv2.imshow('Cam Footage', frame)
 
