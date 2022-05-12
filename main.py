@@ -20,11 +20,12 @@ while cam.isOpened():
     cntrs, _ = cv2.findContours(threshold.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     for c in cntrs:
-        if cv2.contourArea(c) < 1000:
+        if cv2.contourArea(c) < 5000:
             continue
         else:
             (x, y, w, h) = cv2.boundingRect(c)
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 3)
+            cv2.putText(frame, 'INTRUDER ACTIVIY',(0, 100), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 0), 2, cv2.LINE_AA)
 
     cv2.imshow('Cam Footage', frame)
 
