@@ -25,8 +25,8 @@ while cam.isOpened():
         else:
             (x, y, w, h) = cv2.boundingRect(c)
             #cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 3)
-            cv2.putText(frame, 'INTRUDER ACTIVIY',(0, 100), cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 0, 0), 2, cv2.LINE_AA)
-            cv2.imwrite(f'{uuid4()}.jpg', frame)
+            cv2.putText(frame, 'INTRUDER ACTIVIY',(0, 75), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 255), 2, cv2.LINE_AA)
+            cv2.imwrite(f'activities/{uuid4()}.jpg', frame)
 
     cv2.imshow('Cam Footage', frame)
 
