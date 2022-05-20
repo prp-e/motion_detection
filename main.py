@@ -1,7 +1,7 @@
 import cv2
 from uuid import uuid4
 
-cam = cv2.VideoCapture(1)
+cam = cv2.VideoCapture(0)
 first_frame = None
 
 while cam.isOpened():
@@ -20,7 +20,7 @@ while cam.isOpened():
     cntrs, _ = cv2.findContours(threshold.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     for c in cntrs:
-        if cv2.contourArea(c) < 5000:
+        if cv2.contourArea(c) < 1000:
             continue
         else:
             (x, y, w, h) = cv2.boundingRect(c)
