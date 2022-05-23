@@ -5,7 +5,7 @@ from uuid import uuid4
 cam = cv2.VideoCapture(1)
 first_frame = None
 
-video = VideoWriter(str(uuid4()) + '.avi', VideoWriter_fourcc(*'MJPG'), 30, (1280, 720))
+video = VideoWriter(str(uuid4()) + '.avi', VideoWriter_fourcc(*'MJPG'), 24, (1280, 720))
 
 while cam.isOpened():
     _, frame = cam.read()
@@ -29,6 +29,7 @@ while cam.isOpened():
             (x, y, w, h) = cv2.boundingRect(c)
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 3)
             video.write(frame)
+            video.release()
 
 
     cv2.imshow('Cam Footage', frame)
