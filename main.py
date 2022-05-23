@@ -2,10 +2,10 @@ import cv2
 from cv2 import VideoWriter, VideoWriter_fourcc
 from uuid import uuid4
 
-cam = cv2.VideoCapture(0)
+cam = cv2.VideoCapture(1)
 first_frame = None
 
-video = VideoWriter(str(uuid4()) + '.avi', VideoWriter_fourcc(*'MJPG'), 20, (640, 480))
+video = VideoWriter(str(uuid4()) + '.avi', VideoWriter_fourcc(*'MJPG'), 30, (1280, 720))
 
 while cam.isOpened():
     _, frame = cam.read()
@@ -27,10 +27,9 @@ while cam.isOpened():
             continue
         else:
             (x, y, w, h) = cv2.boundingRect(c)
-            #cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 3)
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 3)
             video.write(frame)
 
-            video = VideoWriter(str(uuid4()) + '.avi', VideoWriter_fourcc(*'MJPG'), 20, (640, 480))
 
     cv2.imshow('Cam Footage', frame)
 
