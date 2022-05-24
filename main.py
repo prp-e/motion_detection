@@ -1,10 +1,16 @@
 import cv2
 from cv2 import VideoWriter, VideoWriter_fourcc
 import time
+import threading
 from uuid import uuid4
+
+def make_video(temp_array):
+    pass
 
 cam = cv2.VideoCapture(1)
 first_frame = None
+
+temp = []
 
 while cam.isOpened():
     _, frame = cam.read()
@@ -28,11 +34,9 @@ while cam.isOpened():
             flag = True
             (x, y, w, h) = cv2.boundingRect(c)
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 3)
+            temp.append(frame)
             
     cv2.imshow('Cam Footage', frame)
-
-    flag = False
-    detected = False
 
     first_frame = None
     if cv2.waitKey(1) == ord('q'):
