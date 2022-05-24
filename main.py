@@ -1,11 +1,17 @@
 import cv2
 from cv2 import VideoWriter, VideoWriter_fourcc
+from datetime import datetime
 import time
 import threading
 from uuid import uuid4
 
 def make_video(temp_array):
-    pass
+    video = VideoWriter(datetime.now().strftime("%I : %M : %S") + str(uuid4()) + '.avi', VideoWriter_fourcc('M', 'J', 'P', 'G'), 10, (1280, 720))
+
+    for frame in temp_array:
+        video.write(frame)
+    
+    video.release()
 
 cam = cv2.VideoCapture(1)
 first_frame = None
@@ -35,6 +41,10 @@ while cam.isOpened():
             (x, y, w, h) = cv2.boundingRect(c)
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 3)
             temp.append(frame)
+    
+    if len(temp) > 50:
+        make_video(temp)
+        temp = []
             
     cv2.imshow('Cam Footage', frame)
 
