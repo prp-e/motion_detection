@@ -1,11 +1,10 @@
 import cv2
 from cv2 import VideoWriter, VideoWriter_fourcc
+import time
 from uuid import uuid4
 
 cam = cv2.VideoCapture(1)
 first_frame = None
-
-flag = False
 
 while cam.isOpened():
     _, frame = cam.read()
@@ -29,12 +28,11 @@ while cam.isOpened():
             flag = True
             (x, y, w, h) = cv2.boundingRect(c)
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 3)
-            if flag:
-                video = VideoWriter(str(uuid4()) + '.avi', VideoWriter_fourcc(*'MJPG'), 24, (1280, 720))
-                video.write(frame)
             
     cv2.imshow('Cam Footage', frame)
+
     flag = False
+    detected = False
 
     first_frame = None
     if cv2.waitKey(1) == ord('q'):
