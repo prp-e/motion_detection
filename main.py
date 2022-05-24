@@ -42,7 +42,7 @@ while cam.isOpened():
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 3)
             temp.append(frame)
     
-    if len(temp) > 75:
+    if len(temp) > 150:
         make_video(temp)
         temp = []
             
