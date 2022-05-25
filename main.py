@@ -20,7 +20,6 @@ temp = []
 
 while cam.isOpened():
     _, frame = cam.read()
-    print(frame.shape)
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     gray = cv2.GaussianBlur(gray, (21, 21), 0)
 
@@ -40,7 +39,6 @@ while cam.isOpened():
         else:
             flag = True
             (x, y, w, h) = cv2.boundingRect(c)
-            #cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 3)
             temp.append(frame)
     
     if len(temp) > 100:
