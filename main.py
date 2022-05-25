@@ -5,8 +5,8 @@ import time
 import threading
 from uuid import uuid4
 
-def make_video(temp_array):
-    video = VideoWriter('activities/' + datetime.now().strftime("%Y-%m-%d-%I-%M") + str(uuid4()) + '.avi', VideoWriter_fourcc(*'MJPG'), 24, (1280, 720))
+def make_video(temp_array, frame):
+    video = VideoWriter('activities/' + datetime.now().strftime("%Y-%m-%d-%I-%M") + str(uuid4()) + '.avi', VideoWriter_fourcc(*'MJPG'), 24, (frame.shape[1], frame.shape[0]))
 
     for frame in temp_array:
         video.write(frame)
@@ -44,7 +44,7 @@ while cam.isOpened():
             temp.append(frame)
     
     if len(temp) > 300:
-        make_video(temp)
+        make_video(temp, frame)
         temp = []
             
     cv2.imshow('Cam Footage', frame)
