@@ -13,13 +13,14 @@ def make_video(temp_array):
     
     video.release()
 
-cam = cv2.VideoCapture(1)
+cam = cv2.VideoCapture(0)
 first_frame = None
 
 temp = []
 
 while cam.isOpened():
     _, frame = cam.read()
+    print(frame.shape)
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     gray = cv2.GaussianBlur(gray, (21, 21), 0)
 
